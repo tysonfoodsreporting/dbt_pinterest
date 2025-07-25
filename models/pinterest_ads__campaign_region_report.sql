@@ -1,4 +1,11 @@
-{{ config(enabled=fivetran_utils.enabled_vars(['ad_reporting__pinterest_ads_enabled','pinterest__using_pin_promotion_targeting_report', 'pinterest__using_targeting_geo_region'])) }}
+{{ config(enabled=var('ad_reporting__pinterest_ads_enabled', True),
+    unique_key = ['source_relation','advertiser_id','campaign_id','date_day','country_id','region_id'],
+    partition_by={
+      "field": "date_day", 
+      "data_type": "TIMESTAMP",
+      "granularity": "day"
+    }
+    ) }}
 
 with report as (
     select *
