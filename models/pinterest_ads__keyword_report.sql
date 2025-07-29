@@ -1,4 +1,12 @@
-{{ config(enabled=fivetran_utils.enabled_vars(['ad_reporting__pinterest_ads_enabled','pinterest__using_keywords'])) }}
+{{ config(enabled=fivetran_utils.enabled_vars(['ad_reporting__pinterest_ads_enabled','pinterest__using_keywords']),
+    unique_key = ['source_relation','keyword_id','ad_group_id','advertiser_id','campaign_id','date_day'],
+    partition_by={
+      "field": "date_day", 
+      "data_type": "TIMESTAMP",
+      "granularity": "day"
+    }
+    ) }}
+
 
 with report as (
 

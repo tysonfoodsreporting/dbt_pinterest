@@ -1,4 +1,11 @@
-{{ config(enabled=var('ad_reporting__pinterest_ads_enabled', True)) }}
+{{ config(enabled=var('ad_reporting__pinterest_ads_enabled', True),
+    unique_key = ['source_relation','campaign_id','advertiser_id','date_day'],
+    partition_by={
+      "field": "date_day", 
+      "data_type": "TIMESTAMP",
+      "granularity": "day"
+    }
+    ) }}
 
 with report as (
     select *
