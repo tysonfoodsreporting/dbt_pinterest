@@ -66,6 +66,8 @@ joined as (
         sum(report.total_conversions) as total_conversions,
         sum(report.total_conversions_quantity) as total_conversions_quantity,
         sum(report.total_conversions_value) as total_conversions_value,
+        SUM(COALESCE(report.video_plays, 0)) AS video_plays,
+        SUM(COALESCE(report.video_views, 0)) AS video_views,
         SUM(COALESCE(report.video_paid_25_p, 0) + COALESCE(report.video_earned_25_p, 0)) AS video_total_25_p,
         SUM(COALESCE(report.video_paid_50_p, 0) + COALESCE(report.video_earned_50_p, 0)) AS video_total_50_p,
         SUM(COALESCE(report.video_paid_75_p, 0) + COALESCE(report.video_earned_75_p, 0)) AS video_total_75_p,
